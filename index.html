@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusCycle - Circular Campus Marketplace | IISEIC 2026</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#00998a',
+                            lightgreen: '#e6f5f3',
+                            darkgreen: '#007065',
+                            accent: '#f5a623',
+                            purple: '#6b46c1',
+                            umk: '#1a365d'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .phone-frame {
+            width: 385px;
+            height: 780px;
+            border-radius: 48px;
+            border: 12px solid #1f2937;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+        }
+        .phone-notch {
+            width: 140px;
+            height: 24px;
+            background-color: #1f2937;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 antialiased min-h-screen">
+
+    <!-- TOP PITCH CONTROL BAR -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-brand-green text-white p-2 rounded-xl font-bold text-lg flex items-center justify-center w-10 h-10 shadow-md">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base leading-tight tracking-wide flex items-center gap-2">
+                        CampusCycle <span class="bg-brand-green/20 text-brand-green text-xs px-2 py-0.5 rounded-full border border-brand-green/30">IISEIC 2026</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Circular Marketplace • UMK Campus Solution</p>
+                </div>
+            </div>
+
+            <!-- View Mode Switcher -->
+            <div class="flex items-center bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <button onclick="switchView('desktop')" id="btn-desktop" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 bg-brand-green text-white shadow">
+                    <i class="fa-solid fa-desktop"></i> Web View
+                </button>
+                <button onclick="switchView('mobile')" id="btn-mobile" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-mobile-screen-button"></i> Mobile App Mockup
+                </button>
+                <button onclick="switchView('pitch')" id="btn-pitch" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-award"></i> Pitch Summary
+                </button>
+            </div>
+
+            <!-- Team Quick Badge -->
+            <div class="hidden lg:flex items-center gap-3 text-xs border-l border-slate-700 pl-4 text-slate-300">
+                <div><span class="text-slate-500">Leader:</span> <strong class="text-white">M. Irfan Solehin</strong></div>
+                <div><span class="text-slate-500">Mentor:</span> <strong class="text-white">Dr. Fatihah Mohd</strong></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- ================= VIEW 1: FULL DESKTOP WEB INTERFACE ================= -->
+        <div id="view-desktop" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-brand-darkgreen via-brand-green to-teal-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black pointer-events-none">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <div class="max-w-2xl relative z-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                        <i class="fa-solid fa-leaf text-yellow-300"></i> Sustainable Campus Initiative
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight">Same Books. More Opportunities. A Greener Campus.</h2>
+                    <p class="text-slate-100 text-sm sm:text-base opacity-90">
+                        Trade, buy, sell, or rent used textbooks directly within Universiti Malaysia Kelantan. Cut learning expenses by up to 70%.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="openModal('list-modal')" class="bg-white text-brand-darkgreen hover:bg-slate-100 font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus-circle text-brand-green"></i> List a Book Now
+                        </button>
+                        <button onclick="scrollToSection('lockers')" class="bg-brand-darkgreen/40 hover:bg-brand-darkgreen/60 text-white font-semibold px-4 py-2.5 rounded-xl border border-white/30 backdrop-blur-md transition-all text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-box-archive"></i> Smart Lockers Pickup
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-medium">Avg. Savings</div>
+                        <div class="text-lg font-bold text-slate-800">RM 150 / Sem</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-medium">Books Reused</div>
+                        <div class="text-lg font-bold text-slate-800" id="stat-books">482 Units</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-medium">Paper Saved</div>
+                        <div class="text-lg font-bold text-slate-800">1.2 Tons</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-medium">Eco-Coins Awarded</div>
+                        <div class="text-lg font-bold text-slate-800" id="user-coins">1,250 PTS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-4 justify-between items-center">
+                <!-- Search Bar -->
+                <div class="relative w-full md:w-96">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" onkeyup="filterBooks()" placeholder="Search course code, title, module..." class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-green text-sm bg-slate-50 focus:bg-white transition-all">
+                </div>
+                <!-- Categories -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar" id="category-filters">
+                    <button onclick="setCategory('all')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-brand-green text-white shadow-sm">All Subjects</button>
+                    <button onclick="setCategory('business')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200">Business Management</button>
+                    <button onclick="setCategory('acm')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200">ACM31003 MIS</button>
+                    <button onclick="setCategory('economics')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200">Economics</button>
+                    <button onclick="setCategory('computer')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200">Computer Science</button>
+                </div>
+            </div>
+
+            <!-- Marketplace Book Grid -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-store text-brand-green"></i> Available Marketplace Books
+                    </h3>
+                    <span class="text-xs text-slate-500 font-medium" id="item-count">Showing 4 items</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="book-grid">
+                    <!-- Dynamic Books Render Here -->
+                </div>
+            </div>
+
+            <!-- SMART LOCKERS SECTION -->
+            <div id="lockers" class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">Proposed Integration</span>
+                        <h3 class="text-xl font-extrabold text-slate-800 mt-1 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-brand-green"></i> CampusCycle Smart Pickup Lockers (UMK Library)
+                        </h3>
+                        <p class="text-xs text-slate-500">24/7 Contactless Drop-off and Pickup system for verified campus users.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-xs font-semibold text-slate-600">Locker Hub Online</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Locker Interactive Controls -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                        <h4 class="font-bold text-sm text-slate-700 flex items-center gap-2">
+                            <i class="fa-solid fa-key text-brand-accent"></i> Simulate Pickup / Deposit
+                        </h4>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-500 block mb-1">Enter 6-Digit OTP Code</label>
+                            <input type="text" id="locker-otp" placeholder="e.g. 482910" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-center tracking-widest font-mono font-bold text-lg focus:outline-none focus:border-brand-green">
+                        </div>
+                        <button onclick="simulateLockerUnlock()" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-xl shadow text-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-unlock"></i> Unlock Assigned Compartment
+                        </button>
+                        <p class="text-[11px] text-slate-400 text-center">Simulates contactless pickup at UMK Library Hub.</p>
+                    </div>
+
+                    <!-- Locker Status Grid -->
+                    <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-3" id="locker-grid">
+                        <!-- Dynamic Lockers Render Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= VIEW 2: SMARTPHONE MOCKUP VIEW ================= -->
+        <div id="view-mobile" class="hidden flex justify-center py-4">
+            <div class="phone-frame bg-white relative overflow-hidden flex flex-col shadow-2xl">
+                <!-- Phone Notch -->
+                <div class="phone-notch"></div>
+
+                <!-- Status Bar -->
+                <div class="bg-brand-darkgreen text-white px-6 pt-3 pb-2 text-[10px] font-semibold flex justify-between items-center z-40">
+                    <span>9:41 AM</span>
+                    <span><i class="fa-solid fa-wifi"></i> 5G <i class="fa-solid fa-battery-full ml-1"></i></span>
+                </div>
+
+                <!-- App Header -->
+                <div class="bg-brand-green text-white px-4 py-3 flex items-center justify-between shadow-md z-30">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">CC</div>
+                        <div>
+                            <h2 class="font-bold text-sm leading-none">CampusCycle</h2>
+                            <span class="text-[10px] text-teal-100">UMK Kampus Kota</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openModal('list-modal')" class="bg-white/20 hover:bg-white/30 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button class="bg-white/20 hover:bg-white/30 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scrollable Mobile Content -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 no-scrollbar">
+                    <!-- Search -->
+                    <div class="relative">
+                        <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" placeholder="Search books, notes, past papers..." class="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-slate-200 text-xs focus:outline-none focus:border-brand-green">
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="grid grid-cols-4 gap-2 text-center">
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-brand-green flex flex-col items-center gap-1 shadow-xs">
+                            <i class="fa-solid fa-bag-shopping text-base"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Buy</span>
+                        </div>
+                        <div onclick="openModal('list-modal')" class="bg-white p-2.5 rounded-xl border border-slate-200 text-amber-500 flex flex-col items-center gap-1 shadow-xs cursor-pointer">
+                            <i class="fa-solid fa-tag text-base"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Sell</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-purple-600 flex flex-col items-center gap-1 shadow-xs">
+                            <i class="fa-solid fa-clock-rotate-left text-base"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Rent</span>
+                        </div>
+                        <div onclick="switchView('desktop')" class="bg-white p-2.5 rounded-xl border border-slate-200 text-blue-600 flex flex-col items-center gap-1 shadow-xs cursor-pointer">
+                            <i class="fa-solid fa-box-archive text-base"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Lockers</span>
+                        </div>
+                    </div>
+
+                    <!-- Featured Mobile Feed -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-xs text-slate-800">Featured Textbooks</h4>
+                            <span class="text-[10px] text-brand-green font-semibold">See All</span>
+                        </div>
+
+                        <div class="space-y-3" id="mobile-book-list">
+                            <!-- Mobile items dynamically populated -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Bar -->
+                <div class="bg-white border-t border-slate-200 px-4 py-2 flex justify-around items-center text-slate-400 text-[10px] font-medium z-30">
+                    <div class="text-brand-green flex flex-col items-center gap-0.5">
+                        <i class="fa-solid fa-house text-sm"></i>
+                        <span>Home</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-0.5 hover:text-slate-600">
+                        <i class="fa-solid fa-compass text-sm"></i>
+                        <span>Explore</span>
+                    </div>
+                    <div onclick="openModal('list-modal')" class="bg-brand-green text-white w-10 h-10 rounded-full flex items-center justify-center text-sm shadow-lg -mt-4 border-4 border-white cursor-pointer">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-0.5 hover:text-slate-600">
+                        <i class="fa-solid fa-comment text-sm"></i>
+                        <span>Chat</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-0.5 hover:text-slate-600">
+                        <i class="fa-solid fa-user text-sm"></i>
+                        <span>Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= VIEW 3: PITCH SUMMARY DECK ================= -->
+        <div id="view-pitch" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+                <!-- Header Pitch Info -->
+                <div class="text-center max-w-3xl mx-auto space-y-2 border-b border-slate-100 pb-6">
+                    <span class="bg-brand-green/10 text-brand-darkgreen font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">IISEIC 2026 Pitch Deck</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900">CampusCycle Project Summary</h2>
+                    <p class="text-slate-500 text-sm">A Circular Campus Marketplace for Affordable Learning Materials at Universiti Malaysia Kelantan (UMK)</p>
+                </div>
+
+                <!-- Problem vs Solution -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 p-6 rounded-2xl border border-red-100 space-y-3">
+                        <h3 class="font-extrabold text-red-700 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> 02. Problem Statements
+                        </h3>
+                        <ul class="space-y-2 text-xs text-red-900 font-medium">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark mt-0.5 text-red-500"></i> High learning costs for university students per semester.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark mt-0.5 text-red-500"></i> Usable textbooks remain idle after semester completion.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark mt-0.5 text-red-500"></i> Fragmented and inconvenient buying/selling channels.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-circle-xmark mt-0.5 text-red-500"></i> Limited verification, tracking, and pickup collection points.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 space-y-3">
+                        <h3 class="font-extrabold text-emerald-800 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 03. CampusCycle Solution
+                        </h3>
+                        <ul class="space-y-2 text-xs text-emerald-950 font-medium">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i> <strong>Circular Economy:</strong> Read -> Reuse -> Relearn -> Recycle.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i> <strong>Smart Lockers:</strong> Contactless 24/7 pickup at UMK Library.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i> <strong>Affordable Access:</strong> Buy, Rent, Sell, or Bundle textbooks.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5"></i> <strong>Eco-Incentives:</strong> Earn CampusCycle Coins for discounts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Methodologies 5 Steps -->
+                <div class="space-y-4">
+                    <h3 class="font-extrabold text-slate-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-brand-green"></i> 04. 5-Step Project Methodology
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 text-center">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="w-7 h-7 bg-brand-green text-white rounded-full flex items-center justify-center font-bold text-xs mx-auto mb-2">1</div>
+                            <h4 class="font-bold text-xs text-slate-800">Resource Identification</h4>
+                            <p class="text-[10px] text-slate-500 mt-1">Collect textbooks, past papers, notes.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="w-7 h-7 bg-brand-green text-white rounded-full flex items-center justify-center font-bold text-xs mx-auto mb-2">2</div>
+                            <h4 class="font-bold text-xs text-slate-800">Marketplace Setup</h4>
+                            <p class="text-[10px] text-slate-500 mt-1">Structured mobile & web listings.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="w-7 h-7 bg-brand-green text-white rounded-full flex items-center justify-center font-bold text-xs mx-auto mb-2">3</div>
+                            <h4 class="font-bold text-xs text-slate-800">Pilot Launch</h4>
+                            <p class="text-[10px] text-slate-500 mt-1">20-30 books at UMK Library hub.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="w-7 h-7 bg-brand-green text-white rounded-full flex items-center justify-center font-bold text-xs mx-auto mb-2">4</div>
+                            <h4 class="font-bold text-xs text-slate-800">Incentives & Coins</h4>
+                            <p class="text-[10px] text-slate-500 mt-1">Eco-rewards & voucher partners.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="w-7 h-7 bg-brand-green text-white rounded-full flex items-center justify-center font-bold text-xs mx-auto mb-2">5</div>
+                            <h4 class="font-bold text-xs text-slate-800">Evaluation</h4>
+                            <p class="text-[10px] text-slate-500 mt-1">Savings & feasibility metrics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Section -->
+                <div class="pt-4 border-t border-slate-100">
+                    <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-users text-brand-green"></i> Project Team & Mentor
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <div class="w-14 h-14 rounded-full bg-slate-300 mx-auto mb-2 overflow-hidden flex items-center justify-center font-bold text-slate-600">
+                                <i class="fa-solid fa-user-tie text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs text-slate-900">Muhammad Irfan Solehin Bin Abdul Rashid</h4>
+                            <p class="text-[10px] text-slate-500">Project Leader • FKP UMK</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <div class="w-14 h-14 rounded-full bg-slate-300 mx-auto mb-2 overflow-hidden flex items-center justify-center font-bold text-slate-600">
+                                <i class="fa-solid fa-user-gear text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs text-slate-900">Nur Arisya Iman Binti Mohd Hanaff</h4>
+                            <p class="text-[10px] text-slate-500">Co-Researcher • FKP UMK</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <div class="w-14 h-14 rounded-full bg-slate-300 mx-auto mb-2 overflow-hidden flex items-center justify-center font-bold text-slate-600">
+                                <i class="fa-solid fa-user-check text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs text-slate-900">Chan Kok Leon</h4>
+                            <p class="text-[10px] text-slate-500">Co-Researcher • FKP UMK</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-brand-green/10 border border-brand-green/30 text-center">
+                            <div class="w-14 h-14 rounded-full bg-brand-green text-white mx-auto mb-2 overflow-hidden flex items-center justify-center font-bold text-lg">
+                                Dr
+                            </div>
+                            <h4 class="font-bold text-xs text-brand-darkgreen">Dr. Fatihah Mohd</h4>
+                            <p class="text-[10px] text-slate-600 font-semibold">Project Mentor • FKP UMK</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LIST A BOOK MODAL -->
+    <div id="list-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4 animate-in fade-in zoom-in duration-200">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-extrabold text-slate-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-brand-green"></i> List a Textbook on CampusCycle
+                </h3>
+                <button onclick="closeModal('list-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleNewListing(event)" class="space-y-3">
+                <div>
+                    <label class="text-xs font-semibold text-slate-600 block mb-1">Book Title</label>
+                    <input type="text" id="input-title" required placeholder="e.g. Management Information Systems" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-green">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-semibold text-slate-600 block mb-1">Course Code</label>
+                        <input type="text" id="input-code" required placeholder="e.g. ACM31003" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-600 block mb-1">Price (RM)</label>
+                        <input type="number" id="input-price" required placeholder="e.g. 15" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-green">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-semibold text-slate-600 block mb-1">Subject Category</label>
+                        <select id="input-cat" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-green bg-white">
+                            <option value="acm">ACM31003 MIS</option>
+                            <option value="business">Business Management</option>
+                            <option value="economics">Economics</option>
+                            <option value="computer">Computer Science</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-600 block mb-1">Listing Type</label>
+                        <select id="input-type" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-green bg-white">
+                            <option value="Used">Sell (Used)</option>
+                            <option value="Rent">Rent (per sem)</option>
+                            <option value="Free">Donate / Free</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-xl shadow-md text-xs transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Publish Listing (+50 Eco-Coins)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Sample Marketplace Books Data
+        let books = [
+            { id: 1, title: "Commerce Information Management System", code: "ACM31003", category: "acm", price: 15.00, originalPrice: 45.00, type: "Used", seller: "Irfan S.", locker: "Locker #03", status: "Available" },
+            { id: 2, title: "Principles of Marketing (Malaysian Edition)", code: "BPT20103", category: "business", price: 12.00, originalPrice: 50.00, type: "Used", seller: "Arisya H.", locker: "Locker #01", status: "Available" },
+            { id: 3, title: "Microeconomics for Beginners", code: "ECN10103", category: "economics", price: 5.00, originalPrice: 35.00, type: "Rent", seller: "Chan K.", locker: "Locker #05", status: "Rented" },
+            { id: 4, title: "Fundamentals of Computer Science", code: "CFT10803", category: "computer", price: 18.00, originalPrice: 60.00, type: "Used", seller: "UMK Hub", locker: "Locker #08", status: "Available" }
+        ];
+
+        // Sample Locker Lockers Data
+        let lockers = [
+            { id: "01", status: "Occupied", code: "482910", item: "Marketing Textbook" },
+            { id: "02", status: "Empty", code: "-", item: "None" },
+            { id: "03", status: "Occupied", code: "194022", item: "ACM31003 MIS Book" },
+            { id: "04", status: "Empty", code: "-", item: "None" },
+            { id: "05", status: "Reserved", code: "991024", item: "Microeconomics" },
+            { id: "06", status: "Empty", code: "-", item: "None" },
+            { id: "07", status: "Empty", code: "-", item: "None" },
+            { id: "08", status: "Occupied", code: "302911", item: "Computer Science" }
+        ];
+
+        let currentCategory = 'all';
+        let userPoints = 1250;
+
+        // Initialize App
+        document.addEventListener("DOMContentLoaded", () => {
+            renderBooks();
+            renderLockers();
+        });
+
+        // Switch Top Pitch Views
+        function switchView(mode) {
+            document.getElementById('view-desktop').classList.add('hidden');
+            document.getElementById('view-mobile').classList.add('hidden');
+            document.getElementById('view-pitch').classList.add('hidden');
+
+            document.getElementById('btn-desktop').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white";
+            document.getElementById('btn-mobile').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white";
+            document.getElementById('btn-pitch').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white";
+
+            if (mode === 'desktop') {
+                document.getElementById('view-desktop').classList.remove('hidden');
+                document.getElementById('btn-desktop').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 bg-brand-green text-white shadow";
+            } else if (mode === 'mobile') {
+                document.getElementById('view-mobile').classList.remove('hidden');
+                document.getElementById('btn-mobile').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 bg-brand-green text-white shadow";
+            } else if (mode === 'pitch') {
+                document.getElementById('view-pitch').classList.remove('hidden');
+                document.getElementById('btn-pitch').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 bg-brand-green text-white shadow";
+            }
+        }
+
+        // Render Books in Desktop & Mobile
+        function renderBooks() {
+            const grid = document.getElementById('book-grid');
+            const mobileGrid = document.getElementById('mobile-book-list');
+            const query = document.getElementById('search-input').value.toLowerCase();
+
+            grid.innerHTML = '';
+            mobileGrid.innerHTML = '';
+
+            let filtered = books.filter(b => {
+                const matchCat = currentCategory === 'all' || b.category === currentCategory;
+                const matchQuery = b.title.toLowerCase().includes(query) || b.code.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+
+            document.getElementById('item-count').innerText = `Showing ${filtered.length} items`;
+            document.getElementById('stat-books').innerText = `${books.length + 478} Units`;
+
+            filtered.forEach(book => {
+                // Desktop Card
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-4 border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-3";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-brand-green/10 text-brand-darkgreen font-bold text-[10px] px-2.5 py-0.5 rounded-md">${book.code}</span>
+                            <span class="text-[10px] font-semibold ${book.status === 'Available' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} px-2 py-0.5 rounded-full">${book.status}</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 line-clamp-2">${book.title}</h4>
+                        <div class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-user-circle"></i> Seller: ${book.seller}
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs text-slate-400 line-through">RM ${book.originalPrice.toFixed(2)}</div>
+                            <div class="text-base font-extrabold text-brand-darkgreen">RM ${book.price.toFixed(2)}</div>
+                        </div>
+                        <button onclick="requestPickup('${book.title}', '${book.locker}')" class="bg-brand-green hover:bg-brand-darkgreen text-white font-semibold text-xs px-3 py-1.5 rounded-xl transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-box-open"></i> Reserve
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+
+                // Mobile Card
+                const mCard = document.createElement('div');
+                mCard.className = "bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center shadow-xs";
+                mCard.innerHTML = `
+                    <div class="space-y-0.5">
+                        <span class="bg-teal-50 text-teal-700 font-bold text-[9px] px-1.5 py-0.2 rounded">${book.code}</span>
+                        <h5 class="font-bold text-xs text-slate-800 line-clamp-1">${book.title}</h5>
+                        <div class="text-[10px] text-brand-darkgreen font-extrabold">RM ${book.price.toFixed(2)} <span class="text-slate-400 font-normal line-through">RM ${book.originalPrice.toFixed(2)}</span></div>
+                    </div>
+                    <button onclick="requestPickup('${book.title}', '${book.locker}')" class="bg-brand-green text-white text-[10px] px-2.5 py-1 rounded-lg font-bold">
+                        Pickup
+                    </button>
+                `;
+                mobileGrid.appendChild(mCard);
+            });
+        }
+
+        // Filter Handlers
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200";
+            });
+            event.target.className = "cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-brand-green text-white shadow-sm";
+            renderBooks();
+        }
+
+        function filterBooks() {
+            renderBooks();
+        }
+
+        // Render Lockers
+        function renderLockers() {
+            const container = document.getElementById('locker-grid');
+            container.innerHTML = '';
+
+            lockers.forEach(l => {
+                const box = document.createElement('div');
+                let colorClass = l.status === 'Occupied' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : (l.status === 'Reserved' ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-slate-50 border-slate-200 text-slate-400');
+                
+                box.className = `p-3 rounded-xl border ${colorClass} text-center flex flex-col justify-between h-24 relative`;
+                box.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xs">#${l.id}</span>
+                        <i class="fa-solid ${l.status === 'Occupied' ? 'fa-lock' : 'fa-lock-open'} text-xs"></i>
+                    </div>
+                    <div class="text-[10px] font-semibold line-clamp-1">${l.item}</div>
+                    <div class="text-[9px] uppercase tracking-wider font-bold opacity-75">${l.status}</div>
+                `;
+                container.appendChild(box);
+            });
+        }
+
+        // Simulate Locker Unlock
+        function simulateLockerUnlock() {
+            const otp = document.getElementById('locker-otp').value.trim();
+            if (!otp) {
+                alert("Please enter a 6-digit OTP code (e.g., 482910 or 194022)");
+                return;
+            }
+
+            const found = lockers.find(l => l.code === otp);
+            if (found) {
+                alert(`SUCCESS! Door #${found.id} Unlocked.\nItem: ${found.item}\nPlease collect your book and close the door.`);
+                found.status = "Empty";
+                found.item = "None";
+                found.code = "-";
+                renderLockers();
+                document.getElementById('locker-otp').value = '';
+            } else {
+                alert("Invalid OTP Code! Try 482910 or 194022 for demonstration.");
+            }
+        }
+
+        // Reserve Pickup
+        function requestPickup(title, locker) {
+            const generatedOtp = Math.floor(100000 + Math.random() * 900000);
+            alert(`RESERVATION CONFIRMED!\n\nBook: "${title}"\nLocation: UMK Library Smart Locker (${locker})\nYour Pickup OTP: ${generatedOtp}\n\nUse this OTP in the Smart Locker simulator to unlock!`);
+            document.getElementById('locker-otp').value = generatedOtp;
+            scrollToSection('lockers');
+        }
+
+        // Add New Listing Handler
+        function handleNewListing(e) {
+            e.preventDefault();
+            const title = document.getElementById('input-title').value;
+            const code = document.getElementById('input-code').value;
+            const price = parseFloat(document.getElementById('input-price').value);
+            const cat = document.getElementById('input-cat').value;
+            const type = document.getElementById('input-type').value;
+
+            const newBook = {
+                id: books.length + 1,
+                title: title,
+                code: code.toUpperCase(),
+                category: cat,
+                price: price,
+                originalPrice: price * 2.5,
+                type: type,
+                seller: "M. Irfan S.",
+                locker: "Locker #" + Math.floor(1 + Math.random() * 8).toString().padStart(2, '0'),
+                status: "Available"
+            };
+
+            books.unshift(newBook);
+            userPoints += 50;
+            document.getElementById('user-coins').innerText = `${userPoints} PTS`;
+
+            renderBooks();
+            closeModal('list-modal');
+            alert(`SUCCESS! Your textbook "${title}" has been listed on CampusCycle.\n+50 Eco-Coins added to your balance!`);
+            e.target.reset();
+        }
+
+        // Modal Helpers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
